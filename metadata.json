@@ -1,0 +1,6 @@
+{
+  "name": "深圳冠量科技有限公司 - TopQuant 高频交易服务器",
+  "description": "深圳冠量科技有限公司（TopQuant）官方网站，专业高频交易服务器解决方案提供商。专注证券、期货高速交易及量化交易专用服务器硬件定制与集成优化。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

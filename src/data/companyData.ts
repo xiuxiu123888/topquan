@@ -1,0 +1,619 @@
+import intelLogo from '../assets/images/partners/intel.svg';
+import amdLogo from '../assets/images/partners/amd.svg';
+import xilinxLogo from '../assets/images/partners/xilinx.svg';
+import ciscoLogo from '../assets/images/partners/cisco.svg';
+import asusLogo from '../assets/images/partners/asus.svg';
+import yusurLogo from '../assets/images/partners/yusur.svg';
+import digitalChinaLogo from '../assets/images/partners/digitalchina.png';
+import ingramLogo from '../assets/images/partners/ingram.png';
+import archforceLogo from '../assets/images/partners/archforce.png';
+
+export type ProductCategory = 'hft' | 'gpu' | 'general' | 'accessory' | 'intel' | 'amd';
+export type ChipPlatform = 'Intel' | 'AMD' | 'Universal';
+
+export interface ProductItem {
+  id: string;
+  name: string;
+  category: ProductCategory;
+  categoryName: string;
+  platform: ChipPlatform;
+  series: string;
+  tagline: string;
+  formFactor: string;
+  cooling: string;
+  processor: string;
+  chipset?: string;
+  maxFreq: string;
+  memory: string;
+  storage: string;
+  pcieSlots: string;
+  networking: string;
+  latencyBench: string;
+  powerSupply: string;
+  targetScenarios: string[];
+  keyFeatures: string[];
+  specsTable: { label: string; value: string }[];
+  badge?: string;
+  pdfUrl: string;
+  pdfFileSize: string;
+  pdfPages: number;
+}
+
+export interface DriverDownloadItem {
+  id: string;
+  name: string;
+  category: 'nic' | 'fpga' | 'bios' | 'os' | 'ptp';
+  categoryLabel: string;
+  platform: 'Intel' | 'AMD' | '通用';
+  version: string;
+  releaseDate: string;
+  fileSize: string;
+  supportedOS: string[];
+  description: string;
+  downloadUrl: string;
+}
+
+export interface PartnerItem {
+  name: string;
+  category: 'broker' | 'quant' | 'hardware';
+  categoryLabel: string;
+  role: string;
+  logoText: string;
+  subText: string;
+}
+
+export const COMPANY_INFO = {
+  name: '深圳冠量科技有限公司',
+  shortName: '冠量科技',
+  enName: 'Shenzhen TopQuant Technology Co., Ltd.',
+  brand: 'TopQuant',
+  foundedYear: 2015,
+  location: '中国 · 深圳',
+  corePositioning: '高频交易服务器提供商',
+  mainHeadline: '专注金融前端，赋能量化交易',
+  heroSubtitle: '深圳冠量科技有限公司成立于2015年，是一家具有自主创新能力并为金融市场客户提供高频交易设备的金融科技企业。',
+  phone: '0755-23003729',
+  mobile: '18923779722',
+  hotline: '0755-23003729',
+  telShenzhen: '0755-23003729',
+  email: 'zhouwd@topquant.com.cn',
+  emailSales: 'zhouwd@topquant.com.cn',
+  emailSupport: 'zhouwd@topquant.com.cn',
+  emailGeneral: 'zhouwd@topquant.com.cn',
+  address: '深圳市宝安区留仙一路2号高新奇园区2期1栋A601',
+  businessHours: '工作日 08:30 - 22:00（与国内期货夜盘交易时段同步护航）'
+};
+
+// 首页“关于我们”团队文化与价值观（用户指定真实文案）
+export const COMPANY_TEAM_CULTURE = {
+  fullText: '冠量公司是一个团结协作的团队，创新是冠量生存与发展的灵魂，我们富有拼搏精神，利用团队的智慧、毅力和满腔热情积极迎接挑战。冠量科技坚持诚信守法、客户至上的原则、坚持创新及团队精神。并要求每一位员工正直诚信 、 沟通包容，互相理解 、 行动迅速， 注重成效 ； 团队合作，勇于担当。让员工与公司共同成长。',
+  corePillars: [
+    {
+      title: '正直诚信',
+      desc: '坚持诚信守法、客户至上，以坦诚务实的态度面对客户与合作伙伴。'
+    },
+    {
+      title: '沟通包容，互相理解',
+      desc: '推崇开放坦率的跨部门交流，理解不同视角，凝聚团队智慧与向心力。'
+    },
+    {
+      title: '行动迅速，注重成效',
+      desc: '面对极速变化的金融市场与客户紧急需求，快速响应、敏捷执行、拿结果说话。'
+    },
+    {
+      title: '团队合作，勇于担当',
+      desc: '富有拼搏精神与满腔热情积极迎接挑战，敢于直面硬核技术攻坚，员工与公司共同成长。'
+    }
+  ]
+};
+
+// 产品介绍：TopQuant 系列超频服务器架构综述（用户指定真实文案）
+export const TOPQUANT_OVERCLOCK_SERIES_INFO = {
+  title: 'TopQuant 系列超频服务器',
+  subtitle: '专为高频低延迟交易特殊设计 · 极致软硬件协同底座',
+  description: '选用的定制化组件，都针对于低延迟交易特殊设计，新一代冷却系统、更强力的风扇，冷却效果提高40%，大量QA测试以保证在生产环境中24x7连续稳定运行，拥有可扩展架构，可根据实际业务需求精确调整能力，避免宕机或者性能不济错失转瞬即逝的交易机会。冠量产品已与主流的证券、期货软件商做过匹配性及性能测试，系统性能都有提升或明显提升。冠量公司与行业内领先的硬件、软件商保持着紧密的合作，我们了解交易网络链路上每一个厂家、产品的特性，这让我们的产品很好地融入整个系统环路中并得到极致发挥。',
+  metrics: [
+    { label: '冷却效果提高', value: '+40%', desc: '新一代冷却系统与强力对转风扇' },
+    { label: '连续稳定运行', value: '24×7', desc: '经大量生产级严格QA测试验证' },
+    { label: '主流软件实测', value: '显著提升', desc: '全面适配证券、期货主流柜台' },
+    { label: '链路深度协同', value: '全链路优化', desc: '深谙交易链路上每款软硬件特性' }
+  ]
+};
+
+export const CORE_ADVANTAGES = [
+  {
+    enTitle: 'High Performance',
+    zhTitle: '极致超频与超低纳秒级时延',
+    desc: '特挑体质晶圆，全核恒定5.8GHz+超高频锁频技术，结合板级低延迟布线与内存时序深度调优，彻底消除微秒级延迟抖动。',
+    icon: 'Zap',
+    details: [
+      '特挑高频处理器 (All-Core 5.80GHz+ 持续恒定)',
+      '专用超低时延金融微码 BIOS (关闭C/P-State抖动)',
+      'DDR5 超低时序内存走线与物理层阻抗匹配',
+      'Solarflare / FPGA 直通软硬件内核旁路'
+    ]
+  },
+  {
+    enTitle: 'High Reliability',
+    zhTitle: '严苛可靠性测试流程控制',
+    desc: '实施超越工业标准的金融级测试流程，72小时全负载热应力极限老化与高频时钟抖动监测，出厂配备专属PCIe眼图与时钟质检报告。',
+    icon: 'ShieldCheck',
+    details: [
+      '72小时 100% 满载高温热应力烤机验证',
+      '万级时钟抖动与PCIe 5.0信号完整性眼图实测',
+      '双冗余白金/钛金级电源与工业级防浪涌隔离设计',
+      '关键元器件全温区热阻红外遥测与毫秒级预警'
+    ]
+  },
+  {
+    enTitle: 'Customized Service',
+    zhTitle: '金融级深度按需硬件定制',
+    desc: '从1U/2U定制浅机箱尺寸、双泵闭环工业水冷模组，到专用FPGA加速卡硬件联调与全国金融机房4小时驻场技术服务。',
+    icon: 'Cpu',
+    details: [
+      '适配各期货/证券托管机房浅机架 (进深 < 650mm)',
+      '高压风冷 / 工业级防漏液闭环水冷双重定制',
+      'FPGA算法卡、低延迟网卡出厂联调与固件烧录',
+      '全国核心金融托管机房 4 小时紧急原厂驻场'
+    ]
+  }
+];
+
+export const CORE_TECHNOLOGIES = [
+  {
+    title: '全核锁频与零抖动架构',
+    subtitle: 'Zero Jitter Architecture',
+    desc: '通过专享硬件供电模组强化与冠量定制BIOS固件，将所有CPU核心与环形总线（Ring Bus）锁定在极速频率，彻底消除OS动态调频引入的微秒级不可预期延迟。',
+    stat: '5.80 GHz',
+    statLabel: '全核持续锁频无降频'
+  },
+  {
+    title: '物理层时钟抖动抑制与PCIe眼图优化',
+    subtitle: 'Physical Layer Signal Integrity',
+    desc: '定制高层数低损耗PCB板材，对PCIe 5.0与内存总线进行等长绕线与差分阻抗控制，使用示波器逐台校准眼图开合度，确保高频通信零重传、零丢包。',
+    stat: '< 450 ns',
+    statLabel: '端到端 Tick-to-Trade 时延'
+  },
+  {
+    title: '定制低阻抗微通道水冷散热',
+    subtitle: 'Microchannel Liquid Cooling',
+    desc: '针对超频状态下高达 350W+ 的单核瞬间热功耗，研发专用铜底微水道水冷头与工业级高扬程磁悬浮双泵系统，在 1U 机箱内实现长时间满载运行温度稳定在 68℃ 以下。',
+    stat: '< 68 ℃',
+    statLabel: '72小时满载工作温度'
+  },
+  {
+    title: 'FPGA 纯硬件逻辑流水线解包',
+    subtitle: 'FPGA Hardware Acceleration',
+    desc: '支持在板载 Xilinx UltraScale+ / Agilex FPGA 卡上直接运行硬件行情解码与风控过滤逻辑，实现从光纤PHY层接收至PCIe直达的零CPU中断穿透。',
+    stat: '< 180 ns',
+    statLabel: 'FPGA硬件级极速穿透'
+  }
+];
+
+export const PRODUCT_CATEGORIES = [
+  { id: "hft", label: "高频服务器", desc: "纳秒级超低延迟、特挑超频，分 Intel 与 AMD 双架构，专为量化做市与撮合穿透定制" },
+  { id: "gpu", label: "GPU服务器", desc: "多卡高密度算力，分 Intel 与 AMD 双架构，赋能 AI 量化多因子与实时推理" },
+  { id: "general", label: "普通服务器", desc: "企业级稳健通用计算，分 Intel 与 AMD 双架构，行情清洗分发与集群存储节点" },
+  { id: "accessory", label: "配件 (内含网卡等)", desc: "Solarflare 25G网卡、FPGA硬件加速卡、超低损耗跳线与超频内存" },
+];
+
+export const PRODUCTS_CATALOG: ProductItem[] = [
+  {
+    id: "TQ1810R",
+    name: "TopQuant TQ1810R 1U 旗舰超频服务器",
+    category: "hft",
+    categoryName: "高频服务器",
+    platform: "Intel",
+    series: "1U 旗舰超频液冷系列",
+    tagline: "1U，含导轨 · 18核激活 4.8~5.0GHz · 最新一代闭环液冷系统",
+    formFactor: "1U 机架式，含原厂滑轨导轨",
+    cooling: "TopQuant 最新一代闭环液冷系统 (CPU 温度显著降低，保障持续高频可靠性)",
+    processor: "Intel Core i9-10980XE (18核心36线程，基础频率 3.0GHz，18核全部激活)",
+    chipset: "Intel X299 芯片组",
+    maxFreq: "4.8GHz；4.9GHz；5.0GHz（基础频率 3.0GHz，18核激活锁频）",
+    memory: "64GB（4*16GB，3600MHz 高频低时延），最大支持 128GB",
+    storage: "2个 480GB 企业级 SSD；支持 4* 热插拔 2.5 寸驱动器位",
+    pcieSlots: "1* PCIe 3.0 x16 Low Profile (半高)；1* PCIe 3.0 x16 Full High (全高)",
+    networking: "Solarflare X2522-25G-Plus 双端口极速低延迟网卡",
+    latencyBench: "Tick-to-Trade 单向穿透极速响应",
+    powerSupply: "800W 冗余服务器电源 (1+1 Redundant)",
+    badge: "1U 旗舰超频",
+    pdfUrl: "/datasheets/TopQuant_TQ1810R_Datasheet.pdf",
+    pdfFileSize: "3.8 MB",
+    pdfPages: 4,
+    targetScenarios: ["证券股票做市撮合", "跨期跨品种高频套利", "极速柜台穿透与DMA接入"],
+    keyFeatures: ["高可靠性：TopQuant超频服务器部件经严格筛选，其中最新一代的液冷系统，CPU温度明显降低，大大提升了产品的可靠性和稳定性。产品经严谨的质量测试，能满足用户对稳定性、可靠性的要求。", "整体优化：对金融交易者而言，每降低一纳秒都具有优势。TopQuant超频服务器对BIOS、Linux OS、低延迟网卡进行了匹配性调优，提高稳定性的同时提升了产品的性能，是高频、高速客户一站式优选。", "优异的性价比：不仅为用户提供良好性能体验，也具有更高的性价比，并可按需提供定制化产品和服务。"],
+    specsTable: [{"label": "机箱规格", "value": "1U 机架式，含原厂可调导轨"}, {"label": "处理器 (CPU)", "value": "Intel Core i9-10980XE (18核激活，基础频率 3.0GHz)"}, {"label": "主板芯片组", "value": "Intel X299 芯片组"}, {"label": "超频频率", "value": "4.8GHz；4.9GHz；5.0GHz（18核全部激活运行）"}, {"label": "内存配置", "value": "64GB（4*16GB，3600MHz），最大支持扩展至 128GB"}, {"label": "系统硬盘", "value": "2个 480GB 企业级 SSD"}, {"label": "存储扩展", "value": "支持 4* 热插拔 2.5 寸驱动器位"}, {"label": "CPU 冷却", "value": "TopQuant 最新一代闭环液冷系统"}, {"label": "扩展插槽", "value": "1* PCIe 3.0 x16 Low Profile (半高)；1* PCIe 3.0 x16 Full High (全高)"}, {"label": "输入输出 (I/O)", "value": "4* USB 3.0；1* VGA；1* COM 端口"}, {"label": "板载网口", "value": "2个 1G RJ45 网口"}, {"label": "专用交易网卡", "value": "Solarflare X2522-25G-Plus 超低延迟网卡"}, {"label": "远程管理", "value": "IPMI 专用带外远程管理"}, {"label": "电源供应", "value": "800W 冗余电源"}, {"label": "售后保修", "value": "一年保修，7*24 小时技术支持"}, {"label": "合规认证", "value": "CCC 强制性产品认证"}],
+  },
+  {
+    id: "TQ1811R",
+    name: "TopQuant TQ1811R 1U 旗舰高频服务器 (AMD)",
+    category: "hft",
+    categoryName: "高频服务器",
+    platform: "AMD",
+    series: "1U 旗舰多核高频系列",
+    tagline: "1U，含导轨 · AMD EPYC 9754 128核心 256线程 2.25GHz*2 · 最新一代闭环液冷系统",
+    formFactor: "1U 机架式，含原厂滑轨导轨",
+    cooling: "TopQuant 最新一代闭环液冷系统 (CPU 温度明显降低，大大提升产品的可靠性和稳定性)",
+    processor: "AMD EPYC 9754 128核心 256线程 2.25GHz* 2",
+    chipset: "AMD SP5 平台企业芯片组",
+    maxFreq: "2.25GHz * 2（128核心 256线程，双路高频）",
+    memory: "64GB（4*16GB，3600MHz），最大支持 128GB",
+    storage: "2个 480GB 企业级 SSD；支持 4* 热插拔 2.5 寸驱动器",
+    pcieSlots: "1* PCIe 3.0 x16 Low Profile (半高)；1* PCIe 3.0 x16 Full High (全高)",
+    networking: "Solarflare X2522-25G-Plus",
+    latencyBench: "Tick-to-Trade 多核极速并发响应",
+    powerSupply: "800W，冗余",
+    badge: "AMD 128核双路",
+    pdfUrl: "/datasheets/TopQuant_TQ1811R_Datasheet.pdf",
+    pdfFileSize: "3.9 MB",
+    pdfPages: 4,
+    targetScenarios: ["大规模量化策略多进程并行", "多品种期货高并发高频交易", "极速柜台穿透与DMA接入"],
+    keyFeatures: ["高可靠性：TopQuant超频服务器部件经严格筛选，其中最新一代的液冷系统，CPU温度明显降低，大大提升了产品的可靠性和稳定性。产品经严谨的质量测试，能满足用户对稳定性、可靠性的要求。", "整体优化：对金融交易者而言，每降低一纳秒都具有优势。TopQuant超频服务器对BIOS、Linux OS、低延迟网卡进行了匹配性调优，提高稳定性的同时提升了产品的性能，是高频、高速客户一站式优选。", "优异的性价比：不仅为用户提供良好性能体验，也具有更高的性价比，并可按需提供定制化产品和服务。"],
+    specsTable: [{"label": "机箱", "value": "1U，含导轨"}, {"label": "CPU", "value": "AMD EPYC 9754 128核心 256线程 2.25GHz* 2"}, {"label": "频率", "value": "2.25GHz * 2（128核心 256线程，双路高频）"}, {"label": "芯片组", "value": "AMD SP5 平台"}, {"label": "内存", "value": "64GB（4*16GB，3600MHz），最大支持 128GB"}, {"label": "硬盘", "value": "2个 480GB 企业级 SSD"}, {"label": "存储扩展", "value": "支持 4* 热插拔 2.5 寸驱动器"}, {"label": "CPU冷却", "value": "TopQuant 最新一代闭环液冷系统"}, {"label": "扩展槽", "value": "1* PCIe 3.0 x16 Low Profile (半高)；1* PCIe 3.0 x16 Full High (全高)"}, {"label": "输入输出", "value": "4* USB 3.0；1* VGA；1* COM 端口"}, {"label": "板载网口", "value": "2个 1G RJ45 网口"}, {"label": "网卡", "value": "Solarflare X2522-25G-Plus"}, {"label": "远程管理", "value": "IPMI 管理"}, {"label": "电源", "value": "800W，冗余"}, {"label": "保修", "value": "一年保修，7*24 支持"}, {"label": "认证", "value": "CCC 认证"}],
+  },
+  {
+    id: "TQ1210R",
+    name: "TopQuant TQ1210R 1U 紧凑灵活超频服务器",
+    category: "hft",
+    categoryName: "高频服务器",
+    platform: "Intel",
+    series: "1U 紧凑灵活超频系列",
+    tagline: "1U，含导轨 · 8/10/12核激活 5.1~5.2GHz · 细致优化灵活配置",
+    formFactor: "1U 机架式，含原厂导轨",
+    cooling: "TopQuant 最新一代闭环液冷系统",
+    processor: "Intel Core i9-10940X（或 10920X）",
+    chipset: "Intel X299 芯片组",
+    maxFreq: "5.1GHz；5.2GHz（8核；10核；12核激活超频）",
+    memory: "64GB（4*16GB，3600MHz），最大支持 128GB",
+    storage: "2个 480GB 企业级 SSD；支持 4* 热插拔 2.5 寸驱动器位",
+    pcieSlots: "1* PCIe 3.0 x16 Low Profile (半高)；1* PCIe 3.0 x16 Full High (全高)",
+    networking: "Solarflare X2522-25G-Plus 极速超低时延网卡",
+    latencyBench: "极速穿透与多核灵活适配",
+    powerSupply: "800W 冗余服务器电源",
+    badge: "1U 灵活超频",
+    pdfUrl: "/datasheets/TopQuant_TQ1210R_Datasheet.pdf",
+    pdfFileSize: "2.9 MB",
+    pdfPages: 4,
+    targetScenarios: ["期货高频多品种套利", "高频行情极速分发与解包", "灵活算力低延迟柜台接入"],
+    keyFeatures: ["高可靠性：基于 TQ1810R 一样的平台，也采用最新一代的液冷系统，CPU 温度明显降低，大大提升产品可靠性和稳定性的同时，也有余量提升超频率。经严谨质量测试满足用户稳定性与可靠性要求。", "整体优化及灵活配置：极致的延迟需要系统整体优化，考虑服务器的每一细节。TopQuant 对各个部件做了整体的、细致的优化；可选不同激活 CPU 核数，对应不同超频率，亦可按需定制，适应不同交易场景。"],
+    specsTable: [{"label": "机箱规格", "value": "1U 机架式，含原厂滑轨导轨"}, {"label": "处理器 (CPU)", "value": "Intel Core i9-10940X（或 10920X）"}, {"label": "主板芯片组", "value": "Intel X299 芯片组"}, {"label": "超频频率", "value": "5.1GHz；5.2GHz（8核；10核；12核激活）"}, {"label": "内存配置", "value": "64GB（4*16GB，3600MHz），最大支持 128GB"}, {"label": "系统硬盘", "value": "2个 480GB 企业级 SSD"}, {"label": "存储扩展", "value": "支持 4* 热插拔 2.5 寸驱动器位"}, {"label": "CPU 冷却", "value": "TopQuant 最新一代闭环液冷系统"}, {"label": "扩展插槽", "value": "1* PCIe 3.0 x16 Low Profile (半高)；1* PCIe 3.0 x16 Full High (全高)"}, {"label": "输入输出 (I/O)", "value": "4* USB 3.0；1* VGA；1* COM 端口"}, {"label": "板载网口", "value": "2个 1G RJ45 网口"}, {"label": "专用交易网卡", "value": "Solarflare X2522-25G-Plus 超低延迟网卡"}, {"label": "远程管理", "value": "IPMI 专用远程管理"}, {"label": "电源供应", "value": "800W 冗余电源"}, {"label": "售后保修", "value": "一年保修，7*24 小时技术支持"}, {"label": "合规认证", "value": "CCC 强制性产品认证"}],
+  },
+  {
+    id: "TQ1820R",
+    name: "TopQuant TQ1820R 2U 旗舰超频服务器",
+    category: "hft",
+    categoryName: "高频服务器",
+    platform: "Intel",
+    series: "2U 旗舰高频多扩展系列",
+    tagline: "2U 机架式 · i9-10980XE 4.9~5.0GHz · 双 1200W 冗余 · 丰富 PCIe 扩展",
+    formFactor: "2U 机架式",
+    cooling: "高效 2U 闭环液冷系统",
+    processor: "Intel Core i9-10980XE",
+    chipset: "Intel X299 芯片组",
+    maxFreq: "4.9GHz；5.0GHz 超频锁定",
+    memory: "64GB（4*16GB，3600MHz）",
+    storage: "2个 480GB SSD（标准 RAID1 安全配置）",
+    pcieSlots: "1* PCIe 3.0 x16 (LP), 1* PCIe 3.0 x16 (FHFL), 1* PCIe 3.0 x8（或 2个 LP PCIe 3.0 x16 及 1个 LP PCIe 3.0 x8）",
+    networking: "Solarflare X2522-25G-Plus（标配含 2个 10G-SR 多模光模块）",
+    latencyBench: "极速 Tick-to-Trade 高扩展并发",
+    powerSupply: "2个 1200W 冗余电源",
+    badge: "2U 旗舰超频",
+    pdfUrl: "/datasheets/TopQuant_TQ1820R_Datasheet.pdf",
+    pdfFileSize: "3.4 MB",
+    pdfPages: 4,
+    targetScenarios: ["复杂量化策略并行计算", "多接口柜台直连交易", "海量行情回放与实时风控系统"],
+    keyFeatures: ["强大 2U 扩展性：支持多种 PCIe 3.0 规格组合，可随需并联多张加速卡或采集卡。", "高效 2U 闭环液冷：大排量双泵与长效冷液，压制 5.0GHz 高负载发热，保持低温稳定。", "出厂全套配件齐备：标配原厂导轨、5米 LC-LC 光纤线与网线，开箱即刻接入机房。"],
+    specsTable: [{"label": "机箱规格", "value": "2U 机架式"}, {"label": "主板芯片组", "value": "Intel X299 芯片组"}, {"label": "处理器 (CPU)", "value": "Intel Core i9-10980XE"}, {"label": "超频频率", "value": "4.9GHz；5.0GHz"}, {"label": "内存配置", "value": "64GB（4*16GB，3600MHz）"}, {"label": "系统硬盘", "value": "2个 480GB SSD（标准 RAID1 配置）"}, {"label": "冷却系统", "value": "高效 2U 闭环液冷系统"}, {"label": "专用交易网卡", "value": "Solarflare X2522-25G-Plus（含 2个 10G-SR 模块）"}, {"label": "PCIe 扩展", "value": "1* PCIe 3.0 x16 (LP), 1* PCIe 3.0 x16 (FHFL), 1* PCIe 3.0 x8（或 2个 LP PCIe 3.0 x16 及 1个 LP PCIe 3.0 x8）"}, {"label": "输入输出 (I/O)", "value": "1* VGA，4* USB 3.0"}, {"label": "板载网口 (Lan)", "value": "2* 1GB RJ45"}, {"label": "远程管理", "value": "IPMI 独立带外管理"}, {"label": "电源供应", "value": "2个 1200W 冗余电源"}, {"label": "随箱配件", "value": "一对导轨，2条 5米 LC-LC 光纤线，1条 2米 RJ45 网线；及适配的电源线"}, {"label": "服务保修", "value": "1 年原厂保修，7*24 快速支持"}],
+  },
+  {
+    id: "TQ1020K",
+    name: "TopQuant TQ1020K 2U 极效高频服务器",
+    category: "hft",
+    categoryName: "高频服务器",
+    platform: "Intel",
+    series: "2U 极效高主频系列",
+    tagline: "2U 机架式 · Intel Z490 + i9-10900K · 5.1~5.2GHz 超高主频",
+    formFactor: "2U 机架式",
+    cooling: "高效 2U 闭环液冷系统",
+    processor: "Intel Core i9-10900K",
+    chipset: "Intel Z490 芯片组",
+    maxFreq: "5.1GHz；5.2GHz 超频锁定",
+    memory: "64GB（4*16GB，3600MHz）",
+    storage: "2个 480GB SSD（标准 RAID1 配置）",
+    pcieSlots: "1* PCIe 3.0 x16, 1* PCIe 3.0 x8",
+    networking: "Solarflare X2522-25G-Plus（含 2个 10G-SR 模块）",
+    latencyBench: "极速穿透低时延处理",
+    powerSupply: "2个 800W 冗余电源",
+    badge: "5.2GHz 极效高频",
+    pdfUrl: "/datasheets/TopQuant_TQ1020K_Datasheet.pdf",
+    pdfFileSize: "3.2 MB",
+    pdfPages: 4,
+    targetScenarios: ["单核主频极度敏感型算法", "期货/股票超低时延极速报单", "Tick微观信号实时触发"],
+    keyFeatures: ["超高单核/全核主频：i9-10900K 配合 Z490 芯片组稳定锁定 5.1~5.2GHz，适合单线程交易流水线。", "高效 2U 闭环液冷：专享微通道散热，杜绝热量积蓄引起的降频与掉速。", "工业级双冗余电源：2个 800W 冗余电源，满足生产机房双路供电规范。"],
+    specsTable: [{"label": "机箱规格", "value": "2U 机架式"}, {"label": "主板芯片组", "value": "Intel Z490 芯片组"}, {"label": "处理器 (CPU)", "value": "Intel Core i9-10900K"}, {"label": "超频频率", "value": "5.1GHz；5.2GHz"}, {"label": "内存配置", "value": "64GB（4*16GB，3600MHz）"}, {"label": "系统硬盘", "value": "2个 480GB SSD（标准 RAID1 配置）"}, {"label": "冷却系统", "value": "高效 2U 闭环液冷系统"}, {"label": "专用交易网卡", "value": "Solarflare X2522-25G-Plus（含 2个 10G-SR 模块）"}, {"label": "PCIe 扩展", "value": "1* PCIe 3.0 x16, 1* PCIe 3.0 x8"}, {"label": "输入输出 (I/O)", "value": "1* VGA，4* USB 3.2"}, {"label": "板载网口 (Lan)", "value": "2* 1GB RJ45"}, {"label": "远程管理", "value": "IPMI 独立远程管理"}, {"label": "电源供应", "value": "2个 800W 冗余电源"}, {"label": "随箱配件", "value": "一对导轨，2条 5米 LC-LC 光纤线，1条 2米 RJ45 网线；及适配的电源线"}, {"label": "服务保修", "value": "1 年原厂保修，7*24 快速支持"}],
+  },
+  {
+    id: "TQ-G4000I",
+    name: "TopQuant TQ-G4000I 4U 四卡/八卡 GPU 计算服务器",
+    category: "gpu",
+    categoryName: "GPU服务器",
+    platform: "Intel",
+    series: "量化深度学习与因子挖掘系列",
+    tagline: "4U 机架式 · 支持高达 4-8 张双宽 GPU · 专为量化 Alpha 模型训练打造",
+    formFactor: "4U 标准服务器机箱 (进深 800mm)",
+    cooling: "分区强力散热风道，支持重负荷 GPU 持续低温全速运转",
+    processor: "双路 Intel Xeon Platinum / Emerald Rapids 可扩展处理器",
+    maxFreq: "4.00 GHz 全核高负载稳定睿频",
+    memory: "最高 2TB DDR5 4800 MT/s 八通道 ECC 纠错内存",
+    storage: "8x 2.5/3.5英寸 U.2 NVMe/SAS 热插拔硬盘位",
+    pcieSlots: "高达 8x PCIe 5.0 x16 双宽 GPU 扩展插槽",
+    networking: "标配双口 25G/100G RoCEv2 高带宽网卡",
+    latencyBench: "GPU Direct RDMA 跨节点内存直通访问",
+    powerSupply: "2000W 2+2 钛金级高能效冗余电源",
+    badge: "AI 因子训练",
+    pdfUrl: "/datasheets/TopQuant_TQ_G4000I_Datasheet.pdf",
+    pdfFileSize: "4.1 MB",
+    pdfPages: 6,
+    targetScenarios: ["量化多因子机器学习模型训练", "Tick 级微观结构深度神经网络建模", "海量回测分布式加速集群"],
+    keyFeatures: ["全链路 PCIe 5.0 直通拓扑，支持 GPU Direct RDMA 零拷贝", "高密度计算模块与热插拔电源冗余，保障 7×24 稳健训练", "出厂预配置 CUDA、TensorRT 与金融时序深度学习运行时环境"],
+    specsTable: [{"label": "机箱规格", "value": "4U 标准机架式 (进深 800mm)"}, {"label": "处理器 (CPU)", "value": "双路 Intel Xeon Platinum / Emerald Rapids 系列"}, {"label": "主板芯片组", "value": "Intel C741 芯片组"}, {"label": "运行频率", "value": "最高 4.00 GHz 稳定睿频"}, {"label": "内存配置", "value": "最高 2TB DDR5 4800 MT/s 八通道 ECC 纠错内存"}, {"label": "硬盘存储", "value": "8x 2.5/3.5英寸 U.2 NVMe / SAS 热插拔硬盘位"}, {"label": "冷却架构", "value": "模块化高静压强对流风道"}, {"label": "PCIe 扩展", "value": "高达 8x PCIe 5.0 x16 全速双宽插槽"}, {"label": "网络接口", "value": "标配双口 25G/100G RoCEv2 高速通信卡"}, {"label": "供电电源", "value": "2000W 2+2 钛金级服务器冗余电源"}, {"label": "服务保修", "value": "3 年原厂维保，全国 4 小时应急现场支持"}],
+  },
+  {
+    id: "TQ-G8000A",
+    name: "TopQuant TQ-G8000A AMD 双路 8 卡 GPU 旗舰算力中心",
+    category: "gpu",
+    categoryName: "GPU服务器",
+    platform: "AMD",
+    series: "大规模量化 AI 智算中心系列",
+    tagline: "4U/8U 双路 AMD EPYC 9004 平台 · 128物理核心 · 极速吞吐量",
+    formFactor: "4U / 8U 机架式高密度拓扑机箱",
+    cooling: "模块化工业级对流风墙，支持选配机柜级液冷板",
+    processor: "双路 AMD EPYC 9654 / 9754 旗舰处理器 (高达 128 物理核心)",
+    maxFreq: "3.70 GHz 全核持续高并发算力",
+    memory: "最高 3TB DDR5 4800 MT/s 十二通道内存架构",
+    storage: "12x U.2 NVMe PCIe 5.0 高速阵列",
+    pcieSlots: "10x PCIe 5.0 x16 扩展插槽 (支持 8x 双宽专业加速卡)",
+    networking: "4x 100G/200G InfiniBand / RoCE 高速互联接口",
+    latencyBench: "超高带宽跨卡通信与超大内存通道带宽",
+    powerSupply: "3000W 3+1 钛金级服务器冗余供电系统",
+    badge: "128核大算力",
+    pdfUrl: "/datasheets/TopQuant_TQ_G8000A_Datasheet.pdf",
+    pdfFileSize: "5.2 MB",
+    pdfPages: 8,
+    targetScenarios: ["超大型量化私募量化模型集群", "跨品种全市场历史Tick多卡并行秒级回测", "实盘多因子实时在线推理预测"],
+    keyFeatures: ["十二通道内存架构带来惊人的内存吞吐带宽，彻底解决海量数据加载瓶颈", "支持 8 张全规格加速卡以 PCIe 5.0 x16 全速并行无降速工作", "硬件级健康遥测，出厂经历 72 小时全卡 100% 极限算力稳定性测试"],
+    specsTable: [{"label": "机箱规格", "value": "4U / 8U 机架式高密度机箱"}, {"label": "处理器 (CPU)", "value": "双路 AMD EPYC 9654 / 9754 旗舰处理器 (128物理核心)"}, {"label": "主板架构", "value": "AMD SP5 平台"}, {"label": "运行频率", "value": "3.70 GHz 全核心并发频率"}, {"label": "内存配置", "value": "最高 3TB DDR5 4800 MT/s 十二通道架构"}, {"label": "存储系统", "value": "12x U.2 NVMe PCIe 5.0 阵列"}, {"label": "PCIe 扩展", "value": "10x PCIe 5.0 x16 插槽 (支持 8x 双宽专业计算卡)"}, {"label": "高速互联", "value": "4x 100G/200G InfiniBand / RoCE 端口"}, {"label": "供电系统", "value": "3000W 3+1 钛金级服务器冗余电源"}, {"label": "服务保修", "value": "3 年金牌质保"}],
+  },
+  {
+    id: "TQ-S2200I",
+    name: "TopQuant TQ-S2200I 2U 双路企业通用计算服务器",
+    category: "general",
+    categoryName: "普通服务器",
+    platform: "Intel",
+    series: "企业级基础架构稳健计算系列",
+    tagline: "2U 机架式 · 双路 Intel Xeon · 专为行情清洗分发、撮合后置与集群存储设计",
+    formFactor: "2U 标准机架式 (进深 720mm)",
+    cooling: "冗余热插拔风扇模组，静音与散热效能优化",
+    processor: "双路 Intel Xeon Gold / Silver 企业级处理器",
+    maxFreq: "3.60 GHz 稳定运行主频",
+    memory: "最高 1TB DDR5 ECC 高可靠纠错内存",
+    storage: "12x 3.5英寸 / 24x 2.5英寸 SAS/SATA/NVMe 混合存储盘位",
+    pcieSlots: "6x PCIe 4.0/5.0 扩展插槽",
+    networking: "板载四口千兆 + 双口万兆 SFP+ 网络接口",
+    latencyBench: "金融基础网络微秒级平稳传输",
+    powerSupply: "800W / 1200W 1+1 白金级冗余电源",
+    badge: "企业级稳健通用",
+    pdfUrl: "/datasheets/TopQuant_TQ_S2200I_Datasheet.pdf",
+    pdfFileSize: "2.5 MB",
+    pdfPages: 4,
+    targetScenarios: ["交易所行情清洗与分布式分发节点", "量化策略数据仓库与ClickHouse/DolphinDB节点", "券商后台清算与风控管理"],
+    keyFeatures: ["高密度大容量存储扩展，支持组建千万级 Tick 高性能时序数据库", "全冗余架构设计，主板级防浪涌与双电源双网口热备", "标准机架深度，广泛适配所有主流金融数据中心与云托管机房"],
+    specsTable: [{"label": "机箱规格", "value": "2U 标准机架式 (进深 720mm)"}, {"label": "处理器 (CPU)", "value": "双路 Intel Xeon Gold / Silver 系列"}, {"label": "芯片组", "value": "Intel C621A / C741"}, {"label": "运行频率", "value": "3.60 GHz 稳定频率"}, {"label": "内存配置", "value": "最高 1TB DDR5 ECC 高可靠纠错内存"}, {"label": "存储盘位", "value": "12x 3.5寸或 24x 2.5寸热插拔盘位"}, {"label": "扩展槽位", "value": "6x PCIe 4.0/5.0 扩展插槽"}, {"label": "网络接口", "value": "板载 4x 1GbE + 2x 10GbE SFP+"}, {"label": "电源供应", "value": "800W / 1200W 1+1 白金冗余电源"}, {"label": "保修服务", "value": "3 年整机质保"}],
+  },
+  {
+    id: "TQ-S1200A",
+    name: "TopQuant TQ-S1200A 1U 单路/双路高性价比通用服务器",
+    category: "general",
+    categoryName: "普通服务器",
+    platform: "AMD",
+    series: "高密度通用计算节点系列",
+    tagline: "1U 机架式 · AMD EPYC 单路高效能 · 极低功耗与卓越空间利用率",
+    formFactor: "1U 标准机身 (进深 650mm)",
+    cooling: "高效气冷风道，智能分区温控",
+    processor: "单路 AMD EPYC 8004 / 9004 系列处理器 (最高 64 核)",
+    maxFreq: "3.70 GHz 多核心平衡睿频",
+    memory: "最高 512GB DDR5 4800 MT/s 纠错内存",
+    storage: "4x 3.5英寸或 8x 2.5英寸热插拔盘位",
+    pcieSlots: "2x PCIe 5.0 x16 扩展卡插槽",
+    networking: "标配双口万兆光口 + IPMI 专用独立管理口",
+    latencyBench: "微秒级稳定调度响应",
+    powerSupply: "600W 1+1 金牌/白金级冗余电源",
+    badge: "高能效通用",
+    pdfUrl: "/datasheets/TopQuant_TQ_S1200A_Datasheet.pdf",
+    pdfFileSize: "2.2 MB",
+    pdfPages: 4,
+    targetScenarios: ["中小量化团队轻量级回测节点", "内部代码构建与持续集成CI/CD服务器", "行情接入网关与代理转发服务器"],
+    keyFeatures: ["单路高核心数兼具低采购与低能耗成本，单机即拥有一整个小型集群算力", "原生 PCIe 5.0 高扩展性，支持灵活插接高速网卡或数据采集卡", "全生命周期原厂技术维保与固件长效升级支持"],
+    specsTable: [{"label": "机箱规格", "value": "1U 标准机身 (进深 650mm)"}, {"label": "处理器 (CPU)", "value": "单路 AMD EPYC 8004 / 9004 系列 (最高 64 核)"}, {"label": "运行频率", "value": "3.70 GHz 平衡睿频"}, {"label": "内存配置", "value": "最高 512GB DDR5 4800 MT/s 纠错内存"}, {"label": "硬盘盘位", "value": "4x 3.5寸或 8x 2.5寸热插拔"}, {"label": "扩展槽位", "value": "2x PCIe 5.0 x16 扩展插槽"}, {"label": "网络接口", "value": "双口万兆光口 + IPMI 管理口"}, {"label": "供电电源", "value": "600W 1+1 冗余电源"}, {"label": "保修服务", "value": "3 年原厂质保"}],
+  },
+  {
+    id: "TQ-NIC-X2522",
+    name: "Solarflare XtremeScale X2522 极速双口 25G 超低时延网卡",
+    category: "accessory",
+    categoryName: "配件",
+    platform: "Universal",
+    series: "极速网卡与网络加速配件",
+    tagline: "量化做市与高速交易事实标准 · 支持 Onload 内核旁路与硬件纳秒级时间戳",
+    formFactor: "标准 PCIe 半高/全高扩展卡",
+    cooling: "无源散热片（适配服务器强对流风道）",
+    processor: "Xilinx/Solarflare SFC9250 低延迟网络控制器",
+    maxFreq: "双端口 10G/25G SFP28 线速传输",
+    memory: "板载硬件微包过滤器与环形缓存",
+    storage: "不适用",
+    pcieSlots: "PCIe 3.1/4.0 x8 接口",
+    networking: "2x 10G/25G SFP28 光口/DAC直连线",
+    latencyBench: "Onload 旁路单向时延低至 < 850 ns",
+    powerSupply: "由 PCIe 插槽直接供电 (典型功耗 11W)",
+    badge: "现货即发 · 原厂行货",
+    pdfUrl: "/datasheets/TopQuant_Solarflare_X2522_Spec.pdf",
+    pdfFileSize: "1.8 MB",
+    pdfPages: 2,
+    targetScenarios: ["期货/证券超低延迟交易客户端接入", "组播行情接收与硬件过滤", "内核旁路 UDP/TCP 极速通讯"],
+    keyFeatures: ["支持 Onload / TCPDirect 内核旁路用户态协议栈，消除内核中断上下文切换", "出厂预烧录金融极速低延迟固件，冠量联合技术团队一对一联调", "硬件纳秒级时间戳，满足券商对监管穿透与时钟追溯的合规要求"],
+    specsTable: [{"label": "物理形态", "value": "标准 PCIe 半高卡 (Low Profile)，附全高档板"}, {"label": "控制器", "value": "Solarflare SFC9250 低延迟 ASIC"}, {"label": "网络端口", "value": "2x 10G/25G SFP28 端口"}, {"label": "总线接口", "value": "PCIe 3.1 / 4.0 x8"}, {"label": "时延表现", "value": "用户态内核旁路时延 < 850 ns"}, {"label": "驱动协议", "value": "Onload / TCPDirect / EF_VI / Solarflare SDK"}, {"label": "时间戳", "value": "硬件级亚微秒/纳秒级接收/发送时间戳"}, {"label": "典型功耗", "value": "约 11W"}, {"label": "服务保修", "value": "3 年原厂质保"}],
+  },
+  {
+    id: "TQ-FPGA-U50",
+    name: "Xilinx Alveo U50 / TopQuant 定制款 FPGA 极速加速卡",
+    category: "accessory",
+    categoryName: "配件",
+    platform: "Universal",
+    series: "极速网卡与网络加速配件",
+    tagline: "半高半长外形 · 8GB HBM2 极速高带宽显存 · 专为全硬件行情解包打造",
+    formFactor: "半高半长单槽 PCIe 卡",
+    cooling: "被动散热，由服务器风道高效冷却",
+    processor: "Xilinx UltraScale+ XCU50 FPGA 芯片",
+    maxFreq: "硬件流水线并行执行时钟",
+    memory: "8GB HBM2 极速内存，带宽高达 460 GB/s",
+    storage: "板载 QSPI 快速启动配置 Flash",
+    pcieSlots: "PCIe 4.0 x16 / Gen3 x16 直通插槽",
+    networking: "1x QSFP28 (支持 1x 100G 或 4x 10G/25G)",
+    latencyBench: "PHY 到 FPGA 逻辑穿透处理时延 < 150 ns",
+    powerSupply: "75W 功耗，PCIe 辅助供电",
+    badge: "FPGA 极速核心",
+    pdfUrl: "/datasheets/TopQuant_Alveo_U50_Spec.pdf",
+    pdfFileSize: "2.4 MB",
+    pdfPages: 3,
+    targetScenarios: ["全硬件期货柜台穿透", "毫秒级风控规则纯硬件拦截", "行情硬件解码与订单生成流水线"],
+    keyFeatures: ["内置超高带宽 HBM2 内存，毫秒级快速匹配超大订单簿（OrderBook）", "提供经过国内主流期货交易所验证的开源参考行情解码 IP 与示例工程", "由冠量科技硬件实验室逐张完成时序闭合与 72 小时高温满频稳定性测试"],
+    specsTable: [{"label": "物理形态", "value": "半高半长单槽 PCIe 卡"}, {"label": "FPGA 芯片", "value": "Xilinx UltraScale+ XCU50"}, {"label": "片上显存", "value": "8GB HBM2，带宽 460 GB/s"}, {"label": "网络接口", "value": "1x QSFP28 (100G / 4x25G / 4x10G)"}, {"label": "主机总线", "value": "PCIe 4.0 x16 / PCIe 3.0 x16"}, {"label": "硬件时延", "value": "纯硬件逻辑穿透 < 150 ns"}, {"label": "板卡功耗", "value": "75W 最大功耗"}, {"label": "技术支持", "value": "包含官方参考 IP 核与时序联调"}],
+  },
+  {
+    id: "TQ-MEM-DDR5-OC",
+    name: "TopQuant 专用金融级超低时序 DDR5 6400+ 特挑超频内存条",
+    category: "accessory",
+    categoryName: "配件",
+    platform: "Intel",
+    series: "高频专用配件与模组",
+    tagline: "严选原厂原字原印晶圆 · CL30 极低访问延迟 · 纯铜镀镍散热马甲",
+    formFactor: "标准 UDIMM / RDIMM 规格",
+    cooling: "纯铜镀镍重型散热装甲，贴合高导热相变垫",
+    processor: "海力士 A-die 特挑低延迟内存颗粒",
+    maxFreq: "DDR5 6400 ~ 7200 MT/s 稳定运行",
+    memory: "单条 16GB / 24GB / 32GB / 48GB 规格可选",
+    storage: "不适用",
+    pcieSlots: "标准 288-pin DDR5 内存插槽",
+    networking: "不适用",
+    latencyBench: "内存访问物理延迟缩短 18% 以上",
+    powerSupply: "1.40V 稳定工作电压 (配定制强化供电模组)",
+    badge: "特挑低延迟内存",
+    pdfUrl: "/datasheets/TopQuant_DDR5_Memory_Spec.pdf",
+    pdfFileSize: "1.2 MB",
+    pdfPages: 2,
+    targetScenarios: ["高频交易 CPU 内存密集型算法", "微秒级指令缓存与行情回放", "超频主机 7×24 小时不掉线"],
+    keyFeatures: ["颗颗特挑，严苛经过 72 小时 RunMemTestPro 零容忍压力测试", "预置冠量科技专属 SPD 参数微码，主板通电自适应最佳时序", "原厂终身质保，金融客户备件 4 小时极速换新服务"],
+    specsTable: [{"label": "内存类型", "value": "DDR5 UDIMM / RDIMM"}, {"label": "特挑颗粒", "value": "原厂特挑 A-die 低延迟晶圆"}, {"label": "工作频率", "value": "6400 MT/s ~ 7200 MT/s"}, {"label": "时序参数", "value": "CL30 ~ CL32 低延迟特调时序"}, {"label": "散热结构", "value": "重型纯铜镀镍马甲 + 顶级导热垫"}, {"label": "工作电压", "value": "1.40V 稳压设计"}, {"label": "出厂测试", "value": "72 小时 RunMemTestPro 100% 烤机通过"}, {"label": "售后服务", "value": "原厂终生有限质保"}],
+  },
+];
+
+export const DRIVER_DOWNLOADS: DriverDownloadItem[] = [
+  {
+    id: 'drv-onload-8',
+    name: 'Solarflare Onload / OpenOnload 极速用户态内核旁路驱动包',
+    category: 'nic',
+    categoryLabel: '网卡驱动',
+    platform: '通用',
+    version: 'v8.1.3.28 (冠量优化版)',
+    releaseDate: '2026-03-15',
+    fileSize: '48.6 MB',
+    supportedOS: ['CentOS 7.9', 'RHEL 8/9', 'Ubuntu 22.04 LTS', 'Rocky Linux 9.2'],
+    description: '适用于 Solarflare X2522 / SFN8522 等网卡，包含 TCPDirect 优化栈与硬件纳秒时间戳支持，提供超低时延内核旁路。',
+    downloadUrl: '/drivers/solarflare_onload-8.1.3.28_topquant.tar.gz'
+  },
+  {
+    id: 'drv-silicom-fpga',
+    name: 'Silicom / Intel FPGA PCIe 驱动及 DMA 零拷贝开发套件',
+    category: 'fpga',
+    categoryLabel: 'FPGA开发包',
+    platform: 'Intel',
+    version: 'v2.6.4-LTS',
+    releaseDate: '2026-02-20',
+    fileSize: '124.2 MB',
+    supportedOS: ['Linux x86_64 Kernel 5.4 ~ 6.5', 'CentOS Stream 9'],
+    description: '提供 FPGA 板卡的高速 PCIe Gen5 DMA 驱动，包含用户态大页内存共享与直接寄存器映射读写接口。',
+    downloadUrl: '/drivers/silicom_fpga_dma_v2.6.4.tar.gz'
+  },
+  {
+    id: 'drv-tq1810r-bios',
+    name: 'TQ1810R 专享金融锁频 BIOS 固件升级包 (全核 5.8GHz+ 专属微码)',
+    category: 'bios',
+    categoryLabel: 'BIOS固件',
+    platform: 'Intel',
+    version: 'TQ-BIOS-2026.04-ULTRA',
+    releaseDate: '2026-04-02',
+    fileSize: '32.0 MB',
+    supportedOS: ['UEFI 固件刷写工具', 'IPMI Web 在线升级'],
+    description: '深度关闭 CPU C-State / P-State 节能抖动，锁定全核频率与环形总线倍频，优化 DDR5 内存走线时序并修复已知电压曲线。',
+    downloadUrl: '/firmware/TQ1810R_BIOS_2026_04.bin'
+  },
+  {
+    id: 'drv-lowlatency-os',
+    name: 'TopQuant 专用金融超低延迟 Linux 内核微调优化自动化脚本',
+    category: 'os',
+    categoryLabel: '低时延内核',
+    platform: '通用',
+    version: 'v4.2-Perf',
+    releaseDate: '2026-01-18',
+    fileSize: '8.4 MB',
+    supportedOS: ['CentOS 7/8/9', 'RHEL 8/9', 'Ubuntu 20.04/22.04'],
+    description: '一键配置 CPU 核心隔离（isolcpus）、关闭中断平衡（irqbalance）、配置巨页内存（HugePages）、锁定网卡队列与 NUMA 亲和性。',
+    downloadUrl: '/scripts/topquant_kernel_tune_v4.2.sh'
+  },
+  {
+    id: 'drv-ptp-daemon',
+    name: 'IEEE 1588 PTP 纳秒级高精度网络时钟同步服务套件',
+    category: 'ptp',
+    categoryLabel: '时钟同步',
+    platform: '通用',
+    version: 'v3.1.2-HWTime',
+    releaseDate: '2026-02-05',
+    fileSize: '14.5 MB',
+    supportedOS: ['Linux x86_64', 'Windows Server 2022'],
+    description: '配合 Solarflare 硬件时间戳网卡，实现交易服务器与交易所主时钟源之间的亚微秒/纳秒级精准对齐与漂移监控。',
+    downloadUrl: '/tools/ptp4l_topquant_bundle_v3.1.2.tar.gz'
+  },
+  {
+    id: 'drv-mellanox-ofed',
+    name: 'Mellanox OFED 25G/100G RoCE/IB 驱动及加速库',
+    category: 'nic',
+    categoryLabel: '网卡驱动',
+    platform: '通用',
+    version: 'v5.8-3.0.7.0',
+    releaseDate: '2025-12-10',
+    fileSize: '185.0 MB',
+    supportedOS: ['RHEL 8.6/8.8/9.0', 'Ubuntu 22.04', 'CentOS 7.9'],
+    description: '适用于 ConnectX-5 / ConnectX-6 网卡，支持 GPU Direct RDMA 与用户态高速消息通信。',
+    downloadUrl: '/drivers/MLNX_OFED_LINUX-5.8_topquant.tgz'
+  }
+];
+
+export interface CorePartnerItem {
+  id: string;
+  name: string;
+  enName: string;
+  url: string;
+  logo: string;
+}
+
+export const PARTNERS: CorePartnerItem[] = [
+  { id: 'intel', name: '英特尔', enName: 'Intel', url: 'https://www.intel.cn/', logo: intelLogo },
+  { id: 'amd', name: 'AMD', enName: 'Advanced Micro Devices', url: 'https://www.amd.com/zh-cn.html', logo: amdLogo },
+  { id: 'xilinx', name: '赛灵思', enName: 'Xilinx', url: 'https://www.xilinx.com/', logo: xilinxLogo },
+  { id: 'cisco', name: '思科', enName: 'Cisco', url: 'https://www.cisco.com/site/cn/zh/index.html', logo: ciscoLogo },
+  { id: 'asus', name: '华硕', enName: 'ASUS', url: 'https://www.asus.com.cn/', logo: asusLogo },
+  { id: 'yusur', name: '中科驭数', enName: 'YUSUR', url: 'https://www.yusur.tech/', logo: yusurLogo },
+  { id: 'digitalchina', name: '神州数码', enName: 'Digital China', url: 'https://www.digitalchina.com/', logo: digitalChinaLogo },
+  { id: 'ingram', name: '英迈', enName: 'Ingram Micro', url: 'https://www.ingrammicro.com.cn/', logo: ingramLogo },
+  { id: 'archforce', name: '华锐', enName: '华锐技术 Archforce', url: 'https://www.archforce.cn/', logo: archforceLogo }
+];

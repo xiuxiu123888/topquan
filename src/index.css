@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    scroll-behavior: smooth;
+    color: #1e293b;
+    background-color: #ffffff;
+  }
+}
+
+/* Subtle financial grid pattern for high-tech financial hardware */
+.bg-financial-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+}
+
+.financial-gradient-hero {
+  background: linear-gradient(180deg, #D7EEFD 0%, #EBF6FE 38%, #FFFFFF 100%);
+}
