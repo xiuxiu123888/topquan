@@ -6,7 +6,6 @@ import {
   ProductCategory, 
   ProductItem
 } from '../data/companyData';
-const serverImage = '/comdata/71555/202611/20261110001527623547.jpg';
 import { downloadMockPdf } from '../utils/mockPdf';
 import { 
   Server, 
@@ -27,10 +26,16 @@ import {
   HardDrive,
   Radio,
   Sliders,
-  X,
   Gauge,
   SlidersHorizontal
 } from 'lucide-react';
+
+const PRODUCT_IMAGES: Record<ProductCategory, string> = {
+  hft: '/comdata/71555/202611/20261111000108fc669a.png',
+  gpu: '/comdata/71555/202611/20261110001527623547.jpg',
+  general: '/comdata/71555/202611/2026111100010898180c.jpg',
+  accessory: '/comdata/71555/202611/20261111003849728b53.jpg',
+};
 
 interface ProductCenterProps {
   onOpenPdf: (product: ProductItem) => void;
@@ -53,7 +58,6 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>(initialCategory);
   // 二级大类：分 Intel 与 AMD 两大类
   const [selectedPlatform, setSelectedPlatform] = useState<'Intel' | 'AMD'>(platformParam === 'AMD' ? 'AMD' : 'Intel');
-  const [compareModalOpen, setCompareModalOpen] = useState(false);
   const [downloadNotice, setDownloadNotice] = useState<string | null>(null);
 
   // 滚动监听：当滚动到具体型号区域时，在上方显示面包屑
@@ -300,16 +304,6 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
               </p>
             </div>
 
-            <div className="flex items-center space-x-3">
-              <button
-                onClick={() => setCompareModalOpen(true)}
-                className="px-3.5 py-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 text-xs font-semibold shadow-sm transition-all flex items-center space-x-1.5 cursor-pointer"
-                title="横向查看该分类参数对比矩阵"
-              >
-                <TableIcon className="w-3.5 h-3.5 text-[#0263E0]" />
-                <span>查看全系参数对比表</span>
-              </button>
-            </div>
           </div>
         </div>
 
@@ -606,7 +600,7 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
                     {/* 图片容器 */}
                     <div className="relative rounded-xl overflow-hidden bg-slate-950 border border-slate-700/80 shadow-inner group">
                       <img 
-                        src={serverImage} 
+                        src={PRODUCT_IMAGES[currentProduct.category]} 
                         alt={`${currentProduct.id} ${currentProduct.name}`} 
                         className="w-full h-64 sm:h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500" 
                       />
@@ -822,145 +816,6 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
         </div>
 
       </div>
-
-      {/* 
-        全系参数横向对比弹窗
-      */}
-      {compareModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-150">
-          <div 
-            className="bg-white rounded-2xl shadow-2xl border border-slate-300 w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-150"
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="p-5 sm:p-6 bg-[#0F2847] text-white flex items-center justify-between border-b border-slate-700">
-              <div>
-                <div className="text-xs font-mono text-sky-400 uppercase tracking-widest">
-                  {PRODUCT_CATEGORIES.find(c => c.id === selectedCategory)?.label} ({selectedPlatform} 平台) · 横向对比
-                </div>
-                <h3 className="text-lg font-bold text-white mt-0.5">
-                  标准参数对比矩阵
-                </h3>
-              </div>
-
-              <button
-                onClick={() => setCompareModalOpen(false)}
-                className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="p-6 overflow-x-auto flex-1 bg-slate-50">
-              <table className="min-w-full divide-y divide-slate-200 text-xs text-left bg-white rounded-xl shadow-sm overflow-hidden border border-slate-200">
-                <thead className="bg-slate-100 text-slate-700">
-                  <tr>
-                    <th className="px-4 py-3 font-bold w-36 uppercase">规格对比项</th>
-                    {currentPlatformProducts.map(p => (
-                      <th key={p.id} className="px-4 py-3 min-w-[200px]">
-                        <div className="font-mono font-bold text-sm text-[#0263E0]">{p.id}</div>
-                        <div className="text-[11px] text-slate-500 font-normal truncate">{p.name}</div>
-                        <button
-                          onClick={() => {
-                            setCompareModalOpen(false);
-                            handleSelectProduct(p);
-                          }}
-                          className="mt-2 px-2.5 py-1 rounded bg-[#0263E0] text-white text-[11px] font-semibold hover:bg-[#0052cc] transition-colors cursor-pointer"
-                        >
-                          切换到本款
-                        </button>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-
-                <tbody className="divide-y divide-slate-200">
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">机箱形态</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-900">{p.formFactor}</td>
-                    ))}
-                  </tr>
-                  <tr className="bg-blue-50/20">
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">主频/超频</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 font-bold text-[#0263E0] font-mono">{p.maxFreq}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">处理器 (CPU)</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-900">{p.processor}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">主板芯片组</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-800">{p.chipset || '专属架构'}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">内存配置</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-800">{p.memory}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">硬盘存储</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-800">{p.storage}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">冷却系统</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-800">{p.cooling}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">专用交易网卡</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-900 font-medium">{p.networking}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">供电系统</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5 text-slate-800">{p.powerSupply}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2.5 font-semibold text-slate-700 bg-slate-50">白皮书文档</td>
-                    {currentPlatformProducts.map(p => (
-                      <td key={p.id} className="px-4 py-2.5">
-                        <button
-                          onClick={() => {
-                            setCompareModalOpen(false);
-                            onOpenPdf(p);
-                          }}
-                          className="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1 cursor-pointer"
-                        >
-                          <FileText className="w-3.5 h-3.5 text-rose-500 mr-1" />
-                          <span>PDF预览</span>
-                        </button>
-                      </td>
-                    ))}
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div className="p-4 bg-white border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
-              <span>点击“切换到本款”即可在主舞台详细查阅该机型全部软硬件参数与架构</span>
-              <button
-                onClick={() => setCompareModalOpen(false)}
-                className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold cursor-pointer"
-              >
-                关闭对比窗口
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
     </section>
   );
