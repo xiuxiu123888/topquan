@@ -7,7 +7,6 @@ import {
   Menu, 
   X, 
   ArrowRight,
-  Layers,
 } from 'lucide-react';
 
 import { TopQuantLogo } from './TopQuantLogo';
@@ -142,16 +141,6 @@ export const Header: React.FC = () => {
           >
             服务支持
           </NavLink>
-
-          {/* 5. 联系我们 (Route: /contact) */}
-          <NavLink 
-            to="/contact" 
-            className={({ isActive }) => `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-              isActive ? 'text-[#0263E0] bg-sky-50 font-semibold' : 'text-slate-700 hover:text-[#0263E0] hover:bg-slate-50'
-            }`}
-          >
-            联系我们
-          </NavLink>
         </nav>
 
         <div className="hidden lg:flex items-center gap-2 shrink-0">
@@ -161,13 +150,6 @@ export const Header: React.FC = () => {
           >
             <span>联系我们</span>
             <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
-          </Link>
-          <Link 
-            to="/products" 
-            className="h-9 px-3.5 text-xs font-semibold text-slate-700 hover:text-[#0263E0] border border-slate-200 rounded-md hover:border-sky-300 hover:bg-sky-50/60 transition-colors inline-flex items-center bg-white"
-          >
-            <Layers className="w-3.5 h-3.5 mr-1.5 text-sky-600" />
-            <span>产品规格与 PDF</span>
           </Link>
         </div>
 
@@ -209,21 +191,13 @@ export const Header: React.FC = () => {
           >
             服务支持（驱动下载 · 技术联系 · 7×24热线）
           </button>
-          <button 
-            onClick={() => handleMobileNav('/contact')} 
-            className="w-full text-left px-3 py-2 rounded text-base font-medium text-slate-800 hover:bg-sky-50"
+          <button
+            onClick={() => handleMobileNav('/contact')}
+            className="w-full mt-2 py-2.5 text-sm font-semibold text-white bg-[#0263E0] hover:bg-[#0052cc] rounded-md inline-flex items-center justify-center"
           >
             联系我们
+            <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
           </button>
-          <div className="pt-3 border-t border-slate-100">
-            <button 
-              onClick={() => handleMobileNav('/products')}
-              className="w-full py-2.5 border border-slate-200 text-slate-800 rounded-md text-sm font-medium inline-flex items-center justify-center hover:border-sky-300 hover:text-[#0263E0] hover:bg-sky-50/60"
-            >
-              <Layers className="w-4 h-4 mr-1.5 text-sky-600" />
-              产品规格与 PDF
-            </button>
-          </div>
         </div>
       )}
     </header>

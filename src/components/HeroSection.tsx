@@ -15,7 +15,7 @@ import {
   CheckCircle2,
   HardDrive
 } from 'lucide-react';
-import serverImage from '../assets/images/server_product_1792684555426.jpg';
+const serverImage = '/comdata/71555/202611/20261110001527623547.jpg';
 
 interface HeroSectionProps {
   onOpenPocModal: () => void;

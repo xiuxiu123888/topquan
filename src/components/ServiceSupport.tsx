@@ -2,46 +2,29 @@ import React, { useState } from 'react';
 import { COMPANY_INFO, DRIVER_DOWNLOADS, DriverDownloadItem } from '../data/companyData';
 import { 
   Download, 
-  Search, 
-  Filter, 
   CheckCircle2, 
   PhoneCall, 
   Phone,
   Mail, 
-  Clock, 
   MapPin,
   HardDrive,
   Cpu,
-  Layers,
-  ShieldCheck,
-  Server
 } from 'lucide-react';
 
 export const ServiceSupport: React.FC = () => {
-  const [driverCategory, setDriverCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
   const [downloadSuccessItem, setDownloadSuccessItem] = useState<string | null>(null);
 
-  const filteredDrivers = DRIVER_DOWNLOADS.filter(item => {
-    if (driverCategory !== 'all' && item.category !== driverCategory) return false;
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      return item.name.toLowerCase().includes(q) || 
-             item.supportedOS.some(os => os.toLowerCase().includes(q)) ||
-             item.description.toLowerCase().includes(q);
-    }
-    return true;
-  });
+  const firmware = DRIVER_DOWNLOADS.filter(item => item.category === 'bios');
 
   const handleDownloadDriver = (item: DriverDownloadItem) => {
-    setDownloadSuccessItem(item.id);
     const a = document.createElement('a');
-    a.href = '#';
-    a.download = item.name.replace(/\s+/g, '_') + '.tar.gz';
+    a.href = item.downloadUrl;
+    a.download = item.downloadUrl.split('/').pop() || 'firmware.bin';
     document.body.appendChild(a);
-    setTimeout(() => {
-      setDownloadSuccessItem(null);
-    }, 3000);
+    a.click();
+    a.remove();
+    setDownloadSuccessItem(item.id);
+    setTimeout(() => setDownloadSuccessItem(null), 3000);
   };
 
   return (
@@ -58,7 +41,7 @@ export const ServiceSupport: React.FC = () => {
             驱动下载与技术联系方式
           </h2>
           <p className="mt-3 text-base text-slate-600 leading-relaxed">
-            提供经过实盘严格检验的专用网卡驱动、FPGA开发包、低时延Linux内核脚本及专享BIOS固件下载；配备 7×24 小时技术应急专线与原厂工程师支持。
+            提供经过实盘检验的专享 BIOS 固件；配备 7×24 小时技术应急专线与原厂工程师支持。
           </p>
         </div>
 
@@ -70,93 +53,16 @@ export const ServiceSupport: React.FC = () => {
             <div>
               <h3 className="text-xl font-bold text-slate-900 flex items-center">
                 <HardDrive className="w-5 h-5 text-[#0263E0] mr-2" />
-                官方驱动与固件下载中心
+                官方固件下载
               </h3>
               <p className="text-xs text-slate-500 mt-1">
-                包含 Solarflare Onload、Silicom FPGA、Mellanox OFED、BIOS固件与低延迟调优脚本
+                TQ1810R 专享金融锁频 BIOS 固件
               </p>
             </div>
-
-            {/* 搜索框 */}
-            <div className="relative w-full md:w-72">
-              <input
-                type="text"
-                placeholder="搜索驱动名称、操作系统版本..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500"
-              />
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-            </div>
           </div>
 
-          {/* 驱动类别过滤器 */}
-          <div className="pt-4 pb-6 flex flex-wrap gap-2 text-xs">
-            <button
-              onClick={() => setDriverCategory('all')}
-              className={`px-3 py-1.5 rounded-md font-semibold transition-colors ${
-                driverCategory === 'all'
-                  ? 'bg-[#0263E0] text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              全部下载 ({DRIVER_DOWNLOADS.length})
-            </button>
-            <button
-              onClick={() => setDriverCategory('nic')}
-              className={`px-3 py-1.5 rounded-md font-semibold transition-colors ${
-                driverCategory === 'nic'
-                  ? 'bg-[#0263E0] text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              网卡与内核旁路驱动
-            </button>
-            <button
-              onClick={() => setDriverCategory('fpga')}
-              className={`px-3 py-1.5 rounded-md font-semibold transition-colors ${
-                driverCategory === 'fpga'
-                  ? 'bg-[#0263E0] text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              FPGA开发包与DMA驱动
-            </button>
-            <button
-              onClick={() => setDriverCategory('bios')}
-              className={`px-3 py-1.5 rounded-md font-semibold transition-colors ${
-                driverCategory === 'bios'
-                  ? 'bg-[#0263E0] text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              锁频 BIOS 固件
-            </button>
-            <button
-              onClick={() => setDriverCategory('os')}
-              className={`px-3 py-1.5 rounded-md font-semibold transition-colors ${
-                driverCategory === 'os'
-                  ? 'bg-[#0263E0] text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              低时延 Linux 内核脚本
-            </button>
-            <button
-              onClick={() => setDriverCategory('ptp')}
-              className={`px-3 py-1.5 rounded-md font-semibold transition-colors ${
-                driverCategory === 'ptp'
-                  ? 'bg-[#0263E0] text-white shadow-sm'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100'
-              }`}
-            >
-              PTP 纳秒时钟套件
-            </button>
-          </div>
-
-          {/* 驱动列表表格/卡片 */}
-          <div className="space-y-3">
-            {filteredDrivers.map(item => (
+          <div className="space-y-3 pt-6">
+            {firmware.map(item => (
               <div 
                 key={item.id}
                 className="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-sm hover:border-sky-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
@@ -205,7 +111,7 @@ export const ServiceSupport: React.FC = () => {
                     ) : (
                       <>
                         <Download className="w-4 h-4" />
-                        <span>立即下载</span>
+                        <span>固件下载</span>
                       </>
                     )}
                   </button>
@@ -213,7 +119,7 @@ export const ServiceSupport: React.FC = () => {
               </div>
             ))}
 
-            {filteredDrivers.length === 0 && (
+            {firmware.length === 0 && (
               <div className="py-12 text-center text-slate-500 text-xs">
                 没有找到符合条件的驱动程序，请尝试调整搜索关键词。
               </div>

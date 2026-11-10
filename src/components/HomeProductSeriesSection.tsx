@@ -26,7 +26,7 @@ export const HomeProductSeriesSection: React.FC = () => {
       badge: 'Intel / AMD',
       title: '高频服务器',
       catId: 'hft',
-      desc: 'TQ1810R / TQ1811R (AMD 128核) / TQ1210R / TQ1820R / TQ1020K，最高 5.2GHz 超频与最新一代闭环液冷。',
+      desc: '酷睿、至强 W、至强 6、锐龙、线程撕裂者。2U 机架含导轨，高效 2U 闭环液冷，网卡选配。',
       tags: ['高频服务器', '做市商 / 期货套利'],
       buttonText: '查看机型',
       icon: Server,

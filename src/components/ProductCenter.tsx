@@ -6,7 +6,7 @@ import {
   ProductCategory, 
   ProductItem
 } from '../data/companyData';
-import serverImage from '../assets/images/server_product_1792684555426.jpg';
+const serverImage = '/comdata/71555/202611/20261110001527623547.jpg';
 import { downloadMockPdf } from '../utils/mockPdf';
 import { 
   Server, 
@@ -18,8 +18,6 @@ import {
   Zap, 
   ShieldCheck, 
   ArrowRight, 
-  ArrowLeft,
-  ChevronLeft,
   ChevronRight,
   CheckCircle2, 
   Table as TableIcon,
@@ -97,7 +95,7 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
     if (idParam && PRODUCTS_CATALOG.some(p => p.id === idParam)) {
       return idParam;
     }
-    return currentPlatformProducts[0]?.id || 'TQ1810R';
+    return currentPlatformProducts[0]?.id || '14900KS';
   });
 
   // 当外部传入 idParam 时，自动匹配其所属的一级分类与平台
@@ -279,25 +277,6 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
               >
                 <span>联系我们</span>
               </button>
-
-              {totalInGroup > 1 && (
-                <div className="inline-flex rounded border border-slate-200 bg-slate-50 p-0.5 ml-1">
-                  <button
-                    onClick={handlePrevProduct}
-                    className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                    title="上一款"
-                  >
-                    <ChevronLeft className="w-3.5 h-3.5" />
-                  </button>
-                  <button
-                    onClick={handleNextProduct}
-                    className="p-1 text-slate-600 hover:text-slate-900 hover:bg-white rounded transition-colors cursor-pointer"
-                    title="下一款"
-                  >
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              )}
             </div>
 
           </div>
@@ -377,17 +356,14 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
         {/* 
           2. 二级平台分类选择：分 Intel、AMD 两大类（如果是服务器系列）
         */}
-        <div id="platform-selector" className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-8 scroll-mt-32">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            
-            {/* Intel vs AMD 两大类切换控制器 */}
-            {isServerCategory ? (
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center shrink-0">
-                  <SlidersHorizontal className="w-3.5 h-3.5 mr-1.5 text-[#0263E0]" />
-                </span>
+        <div id="platform-selector" className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 mb-8 scroll-mt-32 space-y-4">
+          {isServerCategory ? (
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center shrink-0">
+                <SlidersHorizontal className="w-3.5 h-3.5 mr-1.5 text-[#0263E0]" />
+              </span>
 
-                <div className="inline-flex rounded-lg bg-slate-100 p-1 border border-slate-200 shadow-inner">
+              <div className="inline-flex rounded-lg bg-slate-100 p-1 border border-slate-200 shadow-inner">
                   <button
                     onClick={() => {
                       setSelectedPlatform('Intel');
@@ -425,29 +401,28 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
                       {categoryProducts.filter(p => p.platform === 'AMD').length} 款机型
                     </span>
                   </button>
-                </div>
               </div>
-            ) : (
-              <div className="flex items-center space-x-2 text-xs font-bold text-slate-700">
-                <Radio className="w-4 h-4 text-[#0263E0]" />
-                <span>配件与硬件加速卡 · 纳秒级网卡、FPGA加速卡与特挑超频内存</span>
-              </div>
-            )}
+            </div>
+          ) : (
+            <div className="flex items-center space-x-2 text-xs font-bold text-slate-700">
+              <Radio className="w-4 h-4 text-[#0263E0]" />
+              <span>配件与硬件加速卡 · 纳秒级网卡、FPGA加速卡与特挑超频内存</span>
+            </div>
+          )}
 
-            {/* 机型横向切换标签 (在大类下面再贴机型快速切换) */}
-            <div className="flex items-center space-x-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none flex-1 justify-start md:justify-end">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider shrink-0 mr-1 flex items-center">
-                <Sliders className="w-3.5 h-3.5 mr-1 text-slate-400" />
-                切换机型:
-              </span>
-
+          <div>
+            <div className="text-xs font-bold text-slate-400 mb-2 flex items-center">
+              <Sliders className="w-3.5 h-3.5 mr-1 text-slate-400" />
+              全部机型
+            </div>
+            <div className="flex flex-wrap gap-2">
               {currentPlatformProducts.map(prod => {
                 const isActive = prod.id === currentProduct.id;
                 return (
                   <button
                     key={prod.id}
                     onClick={() => handleSelectProduct(prod)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shrink-0 flex items-center space-x-1.5 border cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all inline-flex items-center gap-1.5 border cursor-pointer ${
                       isActive
                         ? prod.platform === 'AMD'
                           ? 'bg-[#C43A1A] text-white border-[#C43A1A] shadow-sm'
@@ -467,33 +442,6 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
                 );
               })}
             </div>
-
-            {/* 翻页指示器 */}
-            {totalInGroup > 1 && (
-              <div className="flex items-center justify-between sm:justify-end space-x-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
-                <span className="text-xs text-slate-500 font-mono">
-                  {currentIndex + 1} / {totalInGroup}
-                </span>
-
-                <div className="inline-flex rounded-lg border border-slate-200 bg-slate-50 p-0.5">
-                  <button
-                    onClick={handlePrevProduct}
-                    className="p-1 rounded text-slate-600 hover:text-slate-900 hover:bg-white transition-colors cursor-pointer"
-                    title="上一款机型 (快捷键 ←)"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={handleNextProduct}
-                    className="p-1 rounded text-slate-600 hover:text-slate-900 hover:bg-white transition-colors cursor-pointer"
-                    title="下一款机型 (快捷键 →)"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            )}
-
           </div>
         </div>
 
@@ -850,64 +798,6 @@ export const ProductCenter: React.FC<ProductCenterProps> = ({ onOpenPdf, onReque
 
           </div>
 
-          {/* 
-            底部分页控制器 (当同大类机型数量 > 1 时显示)
-          */}
-          {totalInGroup > 1 && (
-            <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-              
-              <button
-                onClick={handlePrevProduct}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 hover:border-sky-300 hover:bg-slate-50 transition-all flex items-center space-x-3 cursor-pointer group text-left"
-              >
-                <div className="w-8 h-8 rounded-lg bg-slate-100 group-hover:bg-[#0263E0] group-hover:text-white transition-colors flex items-center justify-center text-slate-600">
-                  <ArrowLeft className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[11px] text-slate-400">上一款机型</div>
-                  <div className="text-xs font-bold text-slate-900 font-mono">
-                    {currentPlatformProducts[(currentIndex - 1 + totalInGroup) % totalInGroup]?.id}
-                  </div>
-                </div>
-              </button>
-
-              <div className="text-center">
-                <span className="text-xs text-slate-500 font-mono">
-                  {currentProduct.platform} 大类 · 当前展示第 <strong className="text-slate-900 font-bold">{currentIndex + 1}</strong> 款（共 {totalInGroup} 款）
-                </span>
-                <div className="mt-1 flex items-center justify-center space-x-1.5">
-                  {currentPlatformProducts.map((p, pIdx) => (
-                    <button
-                      key={p.id}
-                      onClick={() => handleSelectProduct(p)}
-                      className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                        pIdx === currentIndex 
-                          ? p.platform === 'AMD' ? 'w-6 bg-[#C43A1A]' : 'w-6 bg-[#0263E0]'
-                          : 'w-2 bg-slate-200 hover:bg-slate-400'
-                      }`}
-                      title={`切换到 ${p.id}`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <button
-                onClick={handleNextProduct}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-200 hover:border-sky-300 hover:bg-slate-50 transition-all flex items-center space-x-3 cursor-pointer group text-right justify-end"
-              >
-                <div>
-                  <div className="text-[11px] text-slate-400">下一款机型</div>
-                  <div className="text-xs font-bold text-slate-900 font-mono">
-                    {currentPlatformProducts[(currentIndex + 1) % totalInGroup]?.id}
-                  </div>
-                </div>
-                <div className="w-8 h-8 rounded-lg bg-slate-100 group-hover:bg-[#0263E0] group-hover:text-white transition-colors flex items-center justify-center text-slate-600">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
-              </button>
-
-            </div>
-          )}
 
           {/* 底部按需定制提示条 */}
           <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
